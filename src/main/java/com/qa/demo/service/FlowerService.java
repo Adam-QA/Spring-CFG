@@ -62,6 +62,7 @@ public class FlowerService {
 		toUpdate.setType(flower.getType());
 		toUpdate.setColour(flower.getColour());
 		toUpdate.setHeight(flower.getHeight());
+		toUpdate.setWeight(flower.getWeight());
 		toUpdate.setPoisonous(flower.isPoisonous());
 		toUpdate.setPrice(flower.getPrice());
 		

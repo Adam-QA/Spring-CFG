@@ -22,6 +22,8 @@ public class Flower {
 	private String type;
 
 	private int height;
+	
+	private int weight;
 
 	@Column(nullable = false)
 	private String colour;
@@ -38,10 +40,11 @@ public class Flower {
 	public Flower() { // Entities MUST have a default constructor
 	}
 
-	public Flower(String type, int height, String colour, double price, boolean poisonous) {
+	public Flower(String type, int height, int weight, String colour, double price, boolean poisonous) {
 		super();
 		this.type = type;
 		this.height = height;
+		this.weight = weight;
 		this.colour = colour;
 		this.price = price;
 		this.poisonous = poisonous;
@@ -57,6 +60,9 @@ public class Flower {
 
 	public int getHeight() {
 		return height;
+	}
+	public int getWeight() {
+		return weight;
 	}
 
 	public long getId() {
@@ -86,6 +92,9 @@ public class Flower {
 	public void setHeight(int height) {
 		this.height = height;
 	}
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
 
 	public void setId(long id) {
 		this.id = id;
@@ -102,7 +111,23 @@ public class Flower {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((colour == null) ? 0 : colour.hashCode());
+		result = prime * result + ((garden == null) ? 0 : garden.hashCode());
+		result = prime * result + height;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (poisonous ? 1231 : 1237);
+		long temp;
+		temp = Double.doubleToLongBits(price);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + weight;
+		return result;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -136,13 +161,18 @@ public class Flower {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
+		if (weight != other.weight)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Flower [id=" + id + ", type=" + type + ", height=" + height + ", colour=" + colour + ", price=" + price
-				+ ", poisonous=" + poisonous + ", garden=" + garden + "]";
+		return "Flower [id=" + id + ", type=" + type + ", height=" + height + ", weight=" + weight + ", colour="
+				+ colour + ", price=" + price + ", poisonous=" + poisonous + ", garden=" + garden + "]";
 	}
+	
+
+	
 
 }
